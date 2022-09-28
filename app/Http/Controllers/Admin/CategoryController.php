@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 
+use function PHPUnit\Framework\returnSelf;
+
 class CategoryController extends Controller
 {
     /**
@@ -81,9 +83,14 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($url)
     {
-        //
+        $category = Category::where('url', $url)->first();
+
+        if(!$category)
+            return redirect()->back();
+
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**

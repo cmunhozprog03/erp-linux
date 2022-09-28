@@ -23,7 +23,7 @@ class CategoryComponent extends Component
 
         $categories = Category::where('name', 'LIKE', '%' . $this->search . '%')
             ->whereOr('description', 'LIKE', '%' . $this->search . '%')
-            ->paginate(1);
+            ->paginate();
         return view('livewire.category-component', compact('categories'));
     }
 }
