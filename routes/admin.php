@@ -11,4 +11,4 @@ Route::get('', [DashboardController::class, 'index'])->name('admin.index');
 
 Route::resource('categorias', CategoryController::class )->names('admin.categories');
 
-rOUTE::get('categoria', CategoryComponent::class);
+//rOUTE::get('categoria', CategoryComponent::class);

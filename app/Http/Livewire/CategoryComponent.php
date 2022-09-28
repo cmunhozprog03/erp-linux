@@ -12,10 +12,18 @@ class CategoryComponent extends Component
 
     protected $paginationTheme = "bootstrap";
 
+    public $search;
+
+    public function updatingSearch(){
+        $this->resetPage();
+    }
+
     public function render()
     {      
 
-        $categories = Category::paginate(1);
+        $categories = Category::where('name', 'LIKE', '%' . $this->search . '%')
+            ->whereOr('description', 'LIKE', '%' . $this->search . '%')
+            ->paginate(1);
         return view('livewire.category-component', compact('categories'));
     }
 }
