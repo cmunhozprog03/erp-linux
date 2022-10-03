@@ -18,7 +18,7 @@
     {!! Form::label('Imagem', null) !!}
     <br>
     {!! Form::file('picture') !!}  
-      @error('PICTURE')
+      @error('picture')
         <div class="text-danger">{{ $message }}</div>
     @enderror
   </div>

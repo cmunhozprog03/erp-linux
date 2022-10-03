@@ -43,7 +43,7 @@
                         </td>
                         <td>
                             <div class="row justify-content-center">
-                                <a href="{{ route('admin.categories.edit', $category->url) }}" class="btn w3-indigo"><i class="fas fa-pencil-alt fa-lg"></i></a>
+                                <a href="{{ route('admin.categories.edit', $category->url) }}" class="btn w3-indigo"><i class="fas fa-pencil-alt w3-xlarge"></i></a>
                             </div>
                         </td>
                     </tr>

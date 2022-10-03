@@ -7,7 +7,7 @@
 @stop --}}
 
 @section('content')
-    {!! Form::model($category, ['route' => ['admin.categories.update', $category], 'method' => 'put', 'files' => true]) !!}
+    {!! Form::model($category, ['route' => ['admin.categories.update', $category->url], 'method' => 'put', 'files' => true]) !!}
       <div class="row justify-content-center">
         <div class="col-sm-12 col-md-8 col-lg-8 mt-2">
           <div class="w3-card-4">
@@ -20,8 +20,8 @@
                   @include('admin.categories._partials.form')
                 </div>
                 <div class="col-sm-12 col-md-4 col-lg-6">
-                  <div class="p-5">
-                    <img class="imgForm" src="{{ url("storage/{$category->picture}") }}" alt="" >
+                  <div>
+                    <img class="img-fluid mt-2" src="{{ url("storage/{$category->picture}") }}" alt="" >
                   </div>
                   
                 </div>
@@ -33,7 +33,7 @@
             <footer>
               <div class="row justify-content-around">
                 <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-dark mb-3">CANCELAR</a>
-                {!! Form::submit('SALVAR', ['class' => 'btn btn-dark mb-3']) !!}
+                {!! Form::submit('ATUALIZAR', ['class' => 'btn btn-dark mb-3']) !!}
               </div>
             </footer>
           </div>

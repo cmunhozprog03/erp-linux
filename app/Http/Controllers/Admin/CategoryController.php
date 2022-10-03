@@ -6,6 +6,8 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateCategory;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
 use function PHPUnit\Framework\returnSelf;
@@ -19,7 +21,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name', 'ASC')->paginate();
+        $categories = Category::orderBy('name', 'ASC')
+            ->paginate();
         return view('admin.categories.index', [
             'categories' => $categories
         ]);
@@ -41,7 +44,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateCategory $request)
     {
         $data = $request->all();
         
@@ -86,7 +89,7 @@ class CategoryController extends Controller
     public function edit($url)
     {
         $category = Category::where('url', $url)->first();
-
+        
         if(!$category)
             return redirect()->back();
 
@@ -100,9 +103,32 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(StoreUpdateCategory $request, $url)
     {
-        //
+        $category = Category::where('url', $url)->first();
+        
+        if(!$category)
+            return redirect()->back();
+
+        $data = $request->all();
+
+        if ($request->hasFile('picture')){
+            if(Storage::exists($category->picture)){
+                Storage::delete($category->picture);
+                Storage::delete($category->thumb);
+            }
+
+            if ($request->picture) {
+                $data['picture'] = $request->picture->store('categories');
+    
+                $data['thumb'] = $request->picture->store('categories/thumbs');
+
+            }
+        }
+        
+        $category->update($data);
+
+        return redirect()->route('admin.categories.index');
     }
 
     /**
