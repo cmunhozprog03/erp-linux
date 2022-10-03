@@ -22,8 +22,8 @@ class CategoryComponent extends Component
     {      
 
         $categories = Category::where('name', 'LIKE', '%' . $this->search . '%')
-            ->whereOr('description', 'LIKE', '%' . $this->search . '%')
-            ->paginate();
+            ->orderBy('name', 'ASC')
+            ->paginate(5);
         return view('livewire.category-component', compact('categories'));
     }
 }

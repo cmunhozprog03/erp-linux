@@ -13,43 +13,46 @@
     </div>
     @if ($categories->count())
     <div class="w3-card-4">
-        <table class="table table-striped table-hover - table-bordered">
-            <thead>
-                <tr class="w3-center txt-input-upper w3-dark-gray">
-
-                    <th width="50%">NOME</th>
-                    {{-- <th>IMAGEM</th> --}}
-                    <th>DESCRIÇÃO</th>
-                    <th>ATIVO</th>
-                    <th>AÇÕES</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($categories as $category)
-                    <tr>
-
-                        <td class="txt-input-upper">{{ $category->name }}</td>
-                        {{-- <td><img src="{{ url("storage/{$category->picture}") }}" alt="{{ $category->name }}"
-                                style="max-width: 70px;"></td>
-
-                        <td> --}}
-                        <td class="txt-input-upper">{{ $category->description }}</td>
-                        <td class="w3-center">
-                            @if ($category->active == 1)
-                                <i class="fas fa-power-off iconIndex text-success"></i>
-                            @else
-                                <i class="fas fa-power-off iconIndex text-danger"></i>
-                            @endif
-                        </td>
-                        <td>
-                            <div class="row justify-content-center">
-                                <a href="{{ route('admin.categories.edit', $category->url) }}" class="btn w3-indigo"><i class="fas fa-pencil-alt w3-xlarge"></i></a>
-                            </div>
-                        </td>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="w3-center txt-input-upper w3-dark-gray">
+    
+                        <th width="40%">NOME</th>
+                        {{-- <th>IMAGEM</th> --}}
+                        <th style="max-width: 40%">DESCRIÇÃO</th>
+                        <th width="5">ATIVO</th>
+                        <th width="5">AÇÕES</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($categories as $category)
+                        <tr>
+    
+                            <td class="txt-input-upper">{{ $category->name }}</td>
+                            {{-- <td><img src="{{ url("storage/{$category->picture}") }}" alt="{{ $category->name }}"
+                                    style="max-width: 70px;"></td>
+    
+                            <td> --}}
+                            <td class="txt-input-upper">{{ $category->description }}</td>
+                            <td class="w3-center">
+                                @if ($category->active == 1)
+                                    <i class="fas fa-power-off iconIndex text-success"></i>
+                                @else
+                                    <i class="fas fa-power-off iconIndex text-danger"></i>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="row justify-content-center">
+                                    <a href="{{ route('admin.categories.edit', $category->url) }}" class="btn w3-indigo"><i class="fas fa-pencil-alt w3-xlarge"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            
+        </div>
         <div class="row justify-content-center">
             <div class="col-6">
                 {{ $categories->links() }}
